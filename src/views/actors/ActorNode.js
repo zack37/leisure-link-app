@@ -4,6 +4,7 @@ export default class ActorNode extends React.Component {
   constructor(props) {
     super(props);
     this.rowClicked = this.rowClicked.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   rowClicked(e) {
@@ -11,10 +12,16 @@ export default class ActorNode extends React.Component {
     this.props.onSelect(this.props.actor);
   }
 
+  delete(e) {
+    e.preventDefault();
+    if(!confirm('Are you sure you want to delete this actor?')) return;
+    this.props.onDelete(this.props.actor._id);
+  }
+
   render() {
     var moviesList = [];
     if(this.props.actor.moviesActedIn) {
-      moviesList = this.props.actor.moviesActedIn.map(function(movie) { return (<li>{movie}</li>); });
+      moviesList = this.props.actor.moviesActedIn.map(function(movie) { return (<li style={{listStyleType: 'none'}}>{movie}</li>); });
     }
 
     return (
@@ -25,10 +32,10 @@ export default class ActorNode extends React.Component {
         <td>{this.props.actor.agent}</td>
         <td>
           <ul>
-            {moviesList}
+              {moviesList}
           </ul>
         </td>
-        <td><span className="glyphicon glyphicon-trash"></span></td>
+        <td><span className="glyphicon glyphicon-trash btn btn-sm" onClick={this.delete}></span></td>
       </tr>
     );
   }

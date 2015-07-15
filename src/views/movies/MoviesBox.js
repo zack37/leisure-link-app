@@ -1,6 +1,6 @@
 import React from 'react'
 import MoviesList from './MoviesList'
-import MovieCreateForm from './MovieCreateForm'
+import MovieForm from './MovieForm'
 
 export default class MoviesBox extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class MoviesBox extends React.Component {
   componentWillMount() {
     $.ajax({
       url: '/movies/all',
-      success: function(data) {
+      success: data => {
         this.setState({movies: data});
       }.bind(this)
     });
@@ -23,9 +23,9 @@ export default class MoviesBox extends React.Component {
       url: '/movies/create',
       method: 'POST',
       data: newMovie,
-      success: data => {
+      success: movie => {
         let movies = this.state.movies;
-        movies.push(newMovie);
+        movies.push(movie);
         this.setState({movies: movies});
       }.bind(this)
     });
@@ -33,8 +33,8 @@ export default class MoviesBox extends React.Component {
 
   render() {
     return (
-      <div>
-        <MovieCreateForm createMovie={this.createMovie}/>
+      <div className="row">
+        <MovieForm createMovie={this.createMovie}/>
         <MoviesList movies={this.state.movies} />
       </div>
     );

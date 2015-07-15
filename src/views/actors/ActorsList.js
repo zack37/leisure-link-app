@@ -7,7 +7,9 @@ export default class ActorsList extends React.Component {
 
     if(this.props.actors){
       var self = this;
-      actorRows = this.props.actors.map(function(actor) { return (<ActorNode actor={actor} onSelect={self.props.onActorSelect} />); });
+      actorRows = this.props.actors.map(function(actor) {
+        return (<ActorNode actor={actor} onSelect={self.props.onActorSelect} onDelete={self.props.onActorDelete} />);
+      });
     }
 
     return(

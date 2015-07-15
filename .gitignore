@@ -28,6 +28,7 @@ node_modules
 
 # Local data directory
 data
+!src/data
 
 # Public exports
 public

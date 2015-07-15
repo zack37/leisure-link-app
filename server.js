@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 require('./src/endpoints/movieendpoint')(app);
 require('./src/endpoints/actorendpoint')(app);
-
+require('./src/endpoints/directorendpoint')(app);
 
 app.get('/test', function(req, res) {
   res.json({message: "Hello, World!"});
